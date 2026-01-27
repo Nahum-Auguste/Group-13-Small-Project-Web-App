@@ -1,6 +1,7 @@
 <?php
 
 	$inData = getRequestInfo();
+	$env = parse_ini_file('.env');
 	
 	$searchResults = "";
 	$searchCount = 0;

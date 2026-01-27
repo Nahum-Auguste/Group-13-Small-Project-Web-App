@@ -2,6 +2,7 @@
 <?php
 
 	$inData = getRequestInfo();
+	$env = parse_ini_file('.env');
 	
 	$id = 0;
 	$firstName = "";
