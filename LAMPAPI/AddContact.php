@@ -1,14 +1,15 @@
 <?php
 	$inData = getRequestInfo();
-	
-	
 
+	// Open up env file
+	$env = parse_ini_file('.env');
 	$first_name = $inData["firstName"];
 	$last_name = $inData["lastName"];
 	$phone = $inData["phone"];
 	$email = $inData["email"];
 	$userId = $inData["userId"];
-	
+
+	// Database settings
 	$db_host = getenv('DB_SERVER');
 	$db_user = getenv('DB_USER');
 	$db_password = getenv('DB_PASS');
