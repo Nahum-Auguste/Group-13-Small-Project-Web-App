@@ -2,14 +2,14 @@
 
 	$inData = getRequestInfo();
 	$env = parse_ini_file('.env');
-	
+
 	$searchResults = "";
 	$searchCount = 0;
 
-	$db_host = getenv('DB_SERVER');
-	$db_user = getenv('DB_USER');
-	$db_password = getenv('DB_PASS');
-	$db_name = getenv('DB_NAME');
+	$db_host = $env['DB_SERVER'];
+	$db_user = $env['DB_USER'];
+	$db_password = $env['DB_PASS'];
+	$db_name = $env['DB_NAME'];
 
 	$conn = new mysqli($db_host, $db_user, $db_password, $db_name);
 	
@@ -20,7 +20,7 @@
 	else
 	{
 		
-		// mehreen will write this later
+		// Query: SELECT * FROM Contacts WHERE UserID=? (and then the ID is the Login person's)
 		$stmt = $conn->prepare("select Name from Colors where Name like ? and UserID=?");
 		$colorName = "%" . $inData["search"] . "%";
 		$stmt->bind_param("ss", $colorName, $inData["userId"]);

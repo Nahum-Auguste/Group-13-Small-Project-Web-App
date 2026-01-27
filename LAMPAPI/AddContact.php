@@ -10,10 +10,10 @@
 	$userId = $inData["userId"];
 
 	// Database settings
-	$db_host = getenv('DB_SERVER');
-	$db_user = getenv('DB_USER');
-	$db_password = getenv('DB_PASS');
-	$db_name = getenv('DB_NAME');
+	$db_host = $env['DB_SERVER'];
+	$db_user = $env['DB_USER'];
+	$db_password = $env['DB_PASS'];
+	$db_name = $env['DB_NAME'];
 
 	$conn = new mysqli($db_host, $db_user, $db_password, $db_name);
 	if ($conn->connect_error) 
