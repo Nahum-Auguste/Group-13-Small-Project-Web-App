@@ -1,22 +1,40 @@
+<!DOCTYPE html>
 <html>
 <head>
-	<title>COP 4331 LAMP Stack Demo</title>
-	<script type="text/javascript" src="js/md5.js"></script>
-	<script type="text/javascript" src="js/code.js"></script>
-    <link href="css/styles.css" rel="stylesheet">	
-    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <title>COP 4331 LAMP Project</title>
+    <script type="text/javascript" src="js/md5.js"></script>
+    <script type="text/javascript" src="js/code.js"></script>
+    <link href="css/styles.css" rel="stylesheet">    
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<h1 id="title">COP 4331 LAMP Stack Demo</h1>
+<div class="container">
+    <h1 id="title">Contacts Manager</h1>
 
-<div id="loginDiv">
-	<span id="inner-title">PLEASE LOG IN</span>
-	<input type="text" id="loginName" placeholder="Username" /><br />
-	<input type="password" id="loginPassword" placeholder="Password"/><br />
-	<button type="button" id="loginButton" class="buttons" onclick="doLogin();"> Do It </button>
-	<span id="loginResult"></span>
+    <div class="cards-wrapper">
+        <!-- Login Card -->
+        <div id="loginCard" class="card">
+            <span id="loginTitle" class="inner-title">Login</span>
+            <input type="text" id="loginName" placeholder="Username" />
+            <input type="password" id="loginPassword" placeholder="Password"/>
+            <button type="button" id="loginButton" class="buttons" onclick="doLogin();">Login</button>
+            <span id="loginResult" class="result-message"></span>
+        </div>
+
+        <!-- Signup Card -->
+        <div id="signupCard" class="card">
+            <span id="signupTitle" class="inner-title">Sign Up</span>
+            <input type="text" id="firstName" placeholder="First Name" />
+            <input type="text" id="lastName" placeholder="Last Name"/>
+            <input type="text" id="signupName" placeholder="Username" />
+            <input type="password" id="signupPassword" placeholder="Password"/>
+            <button type="button" id="signUpButton" class="buttons" onclick="doRegister();">Sign Up</button>
+            <span id="signupResult" class="result-message"></span>
+        </div>
+    </div>
 </div>
+
 
 </body>
 </html>
