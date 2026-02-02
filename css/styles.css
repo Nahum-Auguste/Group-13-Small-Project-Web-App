@@ -1,140 +1,127 @@
-body 
-{
-    background-color: #707070;
+body {
+    font-family: 'Quicksand', sans-serif;
+    background-color: #f9f5f0;
+    color: #5a3e36;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 3rem 1rem;
+    margin: 0;
+    min-height: 100vh;
 }
 
-#title 
-{
-    font-size: 40px;
+.container {
+    text-align: center;
+    max-width: 1200px;
     width: 100%;
-    margin: 2% 5%;
-    text-align: center;
-    font-family: 'Ubuntu', sans-serif;
-    color: #FFFFFF;
 }
 
-#loginDiv
-{
-    font-size: 30px;
-    width: 70%;
-    margin-left: 15%;
-    padding: 25px;
-    background-color: #b2b2b2;
+#title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 3rem;
+    color: #6b4226;
+    letter-spacing: 1px;
 }
 
-#loggedInDiv
-{
-    font-size: 30px;
-    width: 70%;
-    margin-left: 15%;
-    padding: 25px;
-    background-color: #b2b2b2;
+.cards-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    justify-content: center;
+    align-items: center;
 }
 
-#accessUIDiv
-{
-    font-size: 30px;
-    width: 70%;
-    margin-left: 15%;
-    padding: 25px;
-    background-color: #b2b2b2;
+@media (min-width: 900px) {
+    .cards-wrapper {
+        flex-direction: row;
+        align-items: center;
+    }
 }
 
-.buttons
-{
-    font-size: 30px;
-    border-radius: 25px;
-    width: 50%;
-    margin-left: 25%;
-    font-family: 'Ubuntu', sans-serif;
+.card {
+    background-color: #fffaf5;
+    padding: 2.5rem 3rem;
+    border-radius: 20px;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s, box-shadow 0.2s;
+    flex: 1 1 400px;
+    max-width: 450px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
 }
 
-.buttons:hover{
-    background-color: #00d5124f;
-    color: #FFFFFF;
-    opacity: 50%;
-}
-
-#loginName
-{
-	font-size: 30px;
-}
-#loginPassword
-{
-	font-size: 30px;
-}
-#searchText
-{
-	font-size: 30px;
-}
-#colorText
-{
-	font-size: 30px;
-}
-
-input[type="text"],input[type="password"]{
-    border-radius: 25px;
-    text-align: center;
-    width: 80%;
-    margin-left: 10%;
-    margin-bottom: 2%;
-    font-family: 'Ubuntu', sans-serif;
-}
-
-#inner-title{
-    display: inline-block;
-    font-size: 0.8em;
-    width: 90%;
-    text-align: center;
-    margin-left: 5%;
-    margin-bottom: 2%;
-    font-family: 'Ubuntu', sans-serif;
-    color: #95060a;
-}
-
-#loginResult{
-    display: inline-block;
-    font-size: 0.8em;
-    width: 90%;
-    text-align: center;
-    margin-left: 5%;
-    margin-bottom: 2%;
-    font-family: 'Ubuntu', sans-serif;
-    color: #95060a;
-}
-
-#userName{
-    display: inline-block;
-    width: 80%;
-    margin-left: 10%;
+.inner-title {
+    font-weight: 500;
+    font-size: 1.4rem;
+    margin-bottom: 1.5rem;
+    color: #8b5e3c;
     text-align: center;
 }
 
-#logoutButton{
-    width: 20%;
-    margin-left: 40%;
+.card input[type="text"],
+.card input[type="password"] {
+    width: 100%;
+    padding: 0.9rem 1.2rem;
+    margin: 0.5rem 0;
+    border: 1px solid #e6d4c3;
+    border-radius: 12px;
+    font-size: 1rem;
+    background-color: #fffdfb;
+    box-sizing: border-box;
+    transition: border 0.3s, box-shadow 0.3s;
 }
 
-select{
-    width: 30%;
-    margin-left: 35%;
-    margin-top: 2%;
-    font-size: 0.75em;
-    font-family: 'Ubuntu', sans-serif;
+.card input[type="text"]:focus,
+.card input[type="password"]:focus {
+    border-color: #d9a17c;
+    box-shadow: 0 0 0 4px rgba(217, 161, 124, 0.2);
+    outline: none;
 }
 
-#colorSearchResult{
-    display: none;
+.card .buttons {
+    background-color: #d9a17c;
+    color: white;
+    border: none;
+    padding: 0.85rem 1.8rem;
+    border-radius: 14px;
+    font-size: 1rem;
+    margin-top: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s, box-shadow 0.2s;
+    width: 100%;
 }
 
-#colorAddResult{
-    display: inline-block;
-    font-size: 0.8em;
-    width: 90%;
-    text-align: center;
-    margin-left: 5%;
-    margin-top: 2%;
-    margin-bottom: 1%;
-    font-family: 'Ubuntu', sans-serif;
-    color: #95060a;
+.card .buttons:hover {
+    background-color: #c7885e;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.12);
+}
+
+.result-message {
+    display: block;
+    margin-top: 1rem;
+    font-size: 0.95rem;
+    color: #d94f4f;
+}
+
+@media (max-width: 500px) {
+    #title {
+        font-size: 2.2rem;
+        margin-bottom: 2rem;
+    }
+
+    .cards-wrapper {
+        flex-direction: column;
+        gap: 2rem;
+        align-items: center;
+    }
+
+    .card {
+        padding: 1.8rem 2rem;
+        flex: none;
+        width: 100%;
+        max-width: 400px;
+    }
 }
