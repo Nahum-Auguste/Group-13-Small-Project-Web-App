@@ -1,4 +1,4 @@
-const urlBase = 'https://lampmekha.xyz/LAMPAPI';
+const urlBase = 'https://localhost/Group-13-Small-Project-Web-App/LAMPAPI';
 const extension = 'php';
 
 let userId = 0;
@@ -157,7 +157,7 @@ function readCookie() {
 	if (userId < 0) {
 		window.location.href = "index.html";
 	} else {
-		// document.getElementById("userName").innerHTML = "Logged in as " + firstName + " (" + login + ")";
+		document.getElementById("first-name").textContent = firstName;
 	}
 }
 

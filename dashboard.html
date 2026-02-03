@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>COP 4331 LAMP Stack Demo</title>
+	<script type="text/javascript" src="js/code.js"></script>
+    <link href="css/styles.css" rel="stylesheet">	
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;700&display=swap" rel="stylesheet">
+	
+	<script type="text/javascript">
+	document.addEventListener('DOMContentLoaded', function() 
+	{
+		readCookie();
+	}, false);
+	</script>
+	
+</head>
+<body>
+
+	<div class="container">
+
+		<div class="header">
+			<h1 id="title">Contacts Manager</h1>
+
+			<div id="loggedInDiv">
+				<h1>Welcome, <span id="first-name"></span></h1>
+				<button type="button" id="logoutButton" class="buttons" onclick="doLogout();"> Log Out </button>
+			</div>
+		</div>
+
+		<div id="accessUIDiv">
+			<br />
+
+			<input type="text" id="searchText" placeholder="Contact To Search For"/>
+			<button type="button" id="searchColorButton" class="buttons" onclick="searchColor();"> Search Color </button><br />
+			<span id="colorSearchResult"></span>
+			<p id="colorList">
+			</p><br /><br />
+
+			<input type="text" id="colorText" placeholder="Contact To Add">
+			<button type="button" id="addColorButton" class="buttons" onclick="addColor();"> Add Color </button><br />
+			<span id="colorAddResult"></span>
+		</div>
+	</div>
+</body>
+</html>

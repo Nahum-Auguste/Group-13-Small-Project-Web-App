@@ -125,3 +125,28 @@ body {
         max-width: 400px;
     }
 }
+
+/* Dashboard styling */
+
+.header {
+    position: sticky;
+    top: 0;
+}
+
+.header .buttons {
+    background-color: #d9a17c;
+    color: white;
+    border: none;
+    padding: 0.85rem 1.8rem;
+    border-radius: 14px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s, box-shadow 0.2s;
+    width: 100%;
+}
+
+.header .buttons:hover {
+    background-color: #c7885e;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.12);
+}
