@@ -20,7 +20,7 @@ function doLogin() {
 
 	// ensure all info was inputted
 	if (!login || !password) {
-		document.getElementById("signupResult").innerHTML = "All fields are required!";
+		document.getElementById("loginResult").innerHTML = "All fields are required!";
 		return;
 	}
 
@@ -116,7 +116,7 @@ function doRegister() {
 		xhr.send(jsonPayload);
 	}
 	catch (err) {
-		document.getElementById("loginResult").innerHTML = err.message;
+		document.getElementById("signupResult").innerHTML = err.message;
 	}
 }
 
