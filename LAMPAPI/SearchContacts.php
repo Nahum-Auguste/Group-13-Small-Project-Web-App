@@ -20,11 +20,14 @@
 	else
 	{
 		
-		// Query: SELECT * FROM Contacts WHERE UserID=? (and then the ID is the Login person's)
-		$stmt = $conn->prepare("select Name from Colors where Name like ? and UserID=?");
-		$colorName = "%" . $inData["search"] . "%";
-		$stmt->bind_param("ss", $colorName, $inData["userId"]);
+		$stmt = $conn->prepare(
+    		"select FirstName, LastName, Phone, Email from Contacts where (FirstName like ? or LastName like ?) and UserID=?"
+		);
+
+		$contactName = "%" . $inData["search"] . "%";
+		$stmt->bind_param("ssi", $contactName, $contactName, $inData["userId"]);
 		$stmt->execute();
+
 		
 		$result = $stmt->get_result();
 		
@@ -35,7 +38,7 @@
 				$searchResults .= ",";
 			}
 			$searchCount++;
-			$searchResults .= '"' . $row["Name"] . '"';
+			$searchResults .= '{"FirstName":"' . $row["FirstName"] . '","LastName":"' . $row["LastName"] . '","Phone":"' . $row["Phone"] . '","Email":"' . $row["Email"] . '"}';
 		}
 		
 		if( $searchCount == 0 )

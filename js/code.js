@@ -1,4 +1,4 @@
-const urlBase = 'https://localhost/Group-13-Small-Project-Web-App/LAMPAPI';
+const urlBase = 'http://localhost/Group-13-Small-Project-Web-App/LAMPAPI';
 const extension = 'php';
 
 let userId = 0;
@@ -205,40 +205,58 @@ function addColor() {
 
 }
 
-function searchColor() {
+function searchContacts() {
+
+	// clear previous results
+	document.getElementById("contactsList").innerHTML = "";
+	document.getElementById("contactsSearchResult").innerHTML = "";
+	let contactList = "";
+
 	let srch = document.getElementById("searchText").value;
-	document.getElementById("colorSearchResult").innerHTML = "";
+	document.getElementById("contactsSearchResult").innerHTML = "";
 
-	let colorList = "";
-
+	// create payload
 	let tmp = { search: srch, userId: userId };
 	let jsonPayload = JSON.stringify(tmp);
 
-	let url = urlBase + '/SearchColors.' + extension;
+	let url = urlBase + '/SearchContacts.' + extension;
 
 	let xhr = new XMLHttpRequest();
 	xhr.open("POST", url, true);
 	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+
 	try {
 		xhr.onreadystatechange = function () {
 			if (this.readyState == 4 && this.status == 200) {
-				document.getElementById("colorSearchResult").innerHTML = "Color(s) has been retrieved";
+
 				let jsonObject = JSON.parse(xhr.responseText);
 
-				for (let i = 0; i < jsonObject.results.length; i++) {
-					colorList += jsonObject.results[i];
-					if (i < jsonObject.results.length - 1) {
-						colorList += "<br />\r\n";
-					}
+				// handle PHP error
+				if (jsonObject.error !== "") {
+					document.getElementById("contactsSearchResult").innerHTML = jsonObject.error;
+					return;
 				}
 
-				document.getElementsByTagName("p")[0].innerHTML = colorList;
+				document.getElementById("contactsSearchResult").innerHTML = "Contact(s) retrieved";
+
+				// format contacts
+				for (let i = 0; i < jsonObject.results.length; i++) {
+					let contact = jsonObject.results[i];
+
+					contactList +=
+						contact.FirstName + " " +
+						contact.LastName + " | " +
+						contact.Phone + " | " +
+						contact.Email + "<br>";
+				}
+
+				document.getElementById("contactsList").innerHTML = contactList;
 			}
 		};
+
 		xhr.send(jsonPayload);
 	}
 	catch (err) {
-		document.getElementById("colorSearchResult").innerHTML = err.message;
+		document.getElementById("contactsSearchResult").innerHTML = err.message;
 	}
-
 }
