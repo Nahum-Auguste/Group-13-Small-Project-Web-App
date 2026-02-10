@@ -205,6 +205,58 @@ function addColor() {
 
 }
 
+function addContact() {
+	// get inputs
+	let contactFirstName = document.getElementById("contactFirstName").value.trim();
+	let contactLastName = document.getElementById("contactLastName").value.trim();
+	let contactPhone = document.getElementById("contactPhone").value.trim();
+	let contactEmail = document.getElementById("contactEmail").value.trim();
+
+	document.getElementById("addContactResult").innerHTML = "";
+
+	// ensure all info was inputted
+	if(!contactFirstName || !contactLastName || !contactPhone || !contactEmail) {
+		document.getElementById("addContactResult").innerHTML = "All fields are required!";
+		return;
+	}
+
+	// create payload
+	let tmp = {	firstName: contactFirstName, lastName: contactLastName, phone: contactPhone, email: contactEmail, userId: userId };
+	let jsonPayload = JSON.stringify(tmp);
+
+	let url = urlBase + '/AddContact.' + extension;
+
+	let xhr = new XMLHttpRequest();
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+
+	try {
+		xhr.onreadystatechange = function () {
+			if (this.readyState == 4 && this.status == 200) {
+				let jsonObject = JSON.parse(xhr.responseText);
+
+				// error check
+				if (jsonObject.error && jsonObject.error !== "") {
+					document.getElementById("signupResult").innerHTML = jsonObject.error;
+					return;
+				}
+
+				// success!
+				document.getElementById("addContactResult").innerHTML = "Contact succesfully added";
+
+				document.getElementById("contactFirstName").value = "";
+				document.getElementById("contactLastName").value = "";
+				document.getElementById("contactPhone").value = "";
+				document.getElementById("contactEmail").value = "";
+			}
+		};
+		xhr.send(jsonPayload);
+	}
+	catch (err) {
+		document.getElementById("addContactResult").innerHTML = err.message;
+	}
+}
+
 function searchContacts() {
 
 	// clear previous results
