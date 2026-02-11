@@ -178,33 +178,6 @@ function doLogout() {
 	window.location.href = "index.html";
 }
 
-
-function addColor() {
-	let newColor = document.getElementById("colorText").value;
-	document.getElementById("colorAddResult").innerHTML = "";
-
-	let tmp = { color: newColor, userId, userId };
-	let jsonPayload = JSON.stringify(tmp);
-
-	let url = urlBase + '/AddColor.' + extension;
-
-	let xhr = new XMLHttpRequest();
-	xhr.open("POST", url, true);
-	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-	try {
-		xhr.onreadystatechange = function () {
-			if (this.readyState == 4 && this.status == 200) {
-				document.getElementById("colorAddResult").innerHTML = "Color has been added";
-			}
-		};
-		xhr.send(jsonPayload);
-	}
-	catch (err) {
-		document.getElementById("colorAddResult").innerHTML = err.message;
-	}
-
-}
-
 function addContact() {
 	// get inputs
 	let contactFirstName = document.getElementById("contactFirstName").value.trim();
@@ -215,13 +188,13 @@ function addContact() {
 	document.getElementById("addContactResult").innerHTML = "";
 
 	// ensure all info was inputted
-	if(!contactFirstName || !contactLastName || !contactPhone || !contactEmail) {
+	if (!contactFirstName || !contactLastName || !contactPhone || !contactEmail) {
 		document.getElementById("addContactResult").innerHTML = "All fields are required!";
 		return;
 	}
 
 	// create payload
-	let tmp = {	firstName: contactFirstName, lastName: contactLastName, phone: contactPhone, email: contactEmail, userId: userId };
+	let tmp = { firstName: contactFirstName, lastName: contactLastName, phone: contactPhone, email: contactEmail, userId: userId };
 	let jsonPayload = JSON.stringify(tmp);
 
 	let url = urlBase + '/AddContact.' + extension;
