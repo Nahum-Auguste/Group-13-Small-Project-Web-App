@@ -83,37 +83,77 @@
             if ($stmt->error) {
                 returnWithError($stmt->error);
             }
-            $editedFirstName = true;
+            else {
+                $editedFirstName = true;
+            }
         }
 
-        //Update User Contact First Name
+        //Update User Contact Last Name
         if (!empty($newLastName)) {
             $stmt = $conn->prepare("UPDATE Contacts SET LastName=? WHERE UserID=? AND FirstName=? AND LastName=?;");
-            $stmt->bind_param("ssss", $newLastName,$userId,$first_name, $last_name);
+            if ($editedFirstName) {
+                $stmt->bind_param("ssss", $newLastName,$userId,$newFirstName, $last_name);
+            }
+            else {
+                $stmt->bind_param("ssss", $newLastName,$userId,$first_name, $last_name);
+            }
             $stmt->execute();
             if ($stmt->error) {
                 returnWithError($stmt->error);
             }
-            $editedLastName = true;
+            else {
+                $editedLastName = true;
+            }
         }
         
         //Update User Contact Phone Number
         if (!empty($phone)) {
             $stmt = $conn->prepare("UPDATE Contacts SET Phone=? WHERE UserID=? AND FirstName=? AND LastName=?;");
-            $stmt->bind_param("ssss", $phone,$userId,$first_name, $last_name);
+            if ($editedFirstName && !$editedLastName) {
+                $stmt->bind_param("ssss", $phone,$userId,$newFirstName, $last_name);
+            }
+            elseif ($editedLastName && !$editedFirstName) {
+                $stmt->bind_param("ssss", $phone,$userId,$first_name, $newLastName);
+            }
+            elseif ($editedFirstName && $editedLastName) {
+                $stmt->bind_param("ssss", $phone,$userId,$newFirstName, $newLastName);
+            }
+            else {
+                $stmt->bind_param("ssss", $phone,$userId,$first_name, $last_name);
+            }
             $stmt->execute();
             if ($stmt->error) {
                 returnWithError($stmt->error);
             }
-            $editedPhone = true;
+            else {
+                $editedPhone = true;
+            }
         }
 
         //Update User Contact Email
         if (!empty($email)) {
+            
             $stmt = $conn->prepare("UPDATE Contacts SET Email=? WHERE UserID=? AND FirstName=? AND LastName=?;");
-            $stmt->bind_param("ssss", $email,$userId,$first_name, $last_name);
+            if ($editedFirstName && !$editedLastName) {
+                $stmt->bind_param("ssss", $email,$userId,$newFirstName, $last_name);
+            }
+            elseif ($editedLastName && !$editedFirstName) {
+                $stmt->bind_param("ssss", $email,$userId,$first_name, $newLastName);
+            }
+            elseif ($editedFirstName && $editedLastName) {
+                $stmt->bind_param("ssss", $email,$userId,$newFirstName, $newLastName);
+            }
+            else {
+                $stmt->bind_param("ssss", $email,$userId,$first_name, $last_name);
+            }
+            
             $stmt->execute();
-            $editedEmail = true;
+            if ($stmt->error) {
+                returnWithError($stmt->error);
+            }
+            else {
+                $editedEmail = true;
+            }
         }
 		
         if ($stmt->error) {
