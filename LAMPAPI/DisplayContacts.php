@@ -17,6 +17,7 @@
 
     if (empty($userId)) {
         returnWithError("Missing or incorrect userId field.");
+        exit();
     }
 
 	$conn = new mysqli($db_host, $db_user, $db_password, $db_name);
@@ -24,6 +25,7 @@
 	if ($conn->connect_error) 
 	{
 		returnWithError( $conn->connect_error );
+        exit();
 	} 
 	else
 	{
@@ -36,25 +38,32 @@
 
         if ($stmt->error) {
 		    returnWithError($stmt->error);
+             $stmt->close();
+            $conn->close();
+            exit(); 
         }
 
-        if (empty($result)) {
-            returnWithError("Contact User not found.");
-        }
-		else {
-            while($record = $result->fetch_assoc()) {
-                array_push($json,$record);
+        $json = [];
+        if ($result->num_rows === 0) {
+            echo json_encode($json);
+        } else {
+            while ($record = $result->fetch_assoc()) {
+                $json[] = $record;
             }
             echo json_encode($json);
         }
-        
-        
 
         $stmt->close();
 
         //End connection
 		$conn->close();
 	}
+
+    function returnWithSuccess($msg)
+    {
+        $retValue = '{"error":"","message":"' . $msg . '"}';
+        sendResultInfoAsJson($retValue);
+    }
 
 	function returnWithError( $err )
     {

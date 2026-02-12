@@ -210,17 +210,18 @@ function addContact() {
 
 				// error check
 				if (jsonObject.error && jsonObject.error !== "") {
-					document.getElementById("signupResult").innerHTML = jsonObject.error;
+					document.getElementById("addContactResult").innerHTML = jsonObject.error;
 					return;
 				}
 
 				// success!
-				document.getElementById("addContactResult").innerHTML = "Contact succesfully added";
+				document.getElementById("addContactResult").innerHTML = "Contact successfully added";
 
 				document.getElementById("contactFirstName").value = "";
 				document.getElementById("contactLastName").value = "";
 				document.getElementById("contactPhone").value = "";
 				document.getElementById("contactEmail").value = "";
+				displayContacts();
 			}
 		};
 		xhr.send(jsonPayload);
@@ -233,9 +234,8 @@ function addContact() {
 function searchContacts() {
 
 	// clear previous results
-	document.getElementById("contactsList").innerHTML = "";
-	document.getElementById("contactsSearchResult").innerHTML = "";
 	let contactList = "";
+	document.getElementById("contactsSearchResult").innerHTML = "";
 
 	let srch = document.getElementById("searchText").value;
 	document.getElementById("contactsSearchResult").innerHTML = "";
@@ -275,7 +275,7 @@ function searchContacts() {
 						contact.Email + "<br>";
 				}
 
-				document.getElementById("contactsList").innerHTML = contactList;
+				document.getElementById("contactsSearchResult").innerHTML = contactList;
 			}
 		};
 
@@ -284,4 +284,72 @@ function searchContacts() {
 	catch (err) {
 		document.getElementById("contactsSearchResult").innerHTML = err.message;
 	}
+}
+
+function displayContacts() {
+	// prep payload
+	let tmp = { userId: userId };
+	let jsonPayload = JSON.stringify(tmp);
+
+	let url = urlBase + '/DisplayContacts.' + extension;
+
+	// create request
+	let xhr = new XMLHttpRequest();
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+
+	xhr.onreadystatechange = function () {
+		if (this.readyState == 4 && this.status == 200) {
+			let contacts;
+			try {
+				contacts = JSON.parse(xhr.responseText);
+			} catch (err) {
+				console.error("Failed to parse contacts JSON:", xhr.responseText);
+				contacts = [];
+			}
+
+			let list = document.getElementById("contactsList");
+			list.innerHTML = "";
+
+			if (!contacts || contacts.error) {
+				list.innerHTML = "No contacts found.";
+				return;
+			}
+
+			// add html for each contact
+			for (let i = 0; i < contacts.length; i++) {
+				let c = contacts[i];
+
+				list.innerHTML += `
+                <div class="contact-row">
+                    <div class="contact-info">
+                        <div class="contact-name">
+                            ${c.FirstName} ${c.LastName}
+                        </div>
+                        <div class="contact-meta">
+                            ${c.Phone} • ${c.Email}
+                        </div>
+                    </div>
+
+                    <div class="contact-actions">
+                        <button class="icon-button edit-button">
+                            <svg viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168z"/>
+                            </svg>
+                        </button>
+
+                        <button class="icon-button delete-button">
+                            <svg viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M5.5 5.5v7a.5.5 0 0 0 1 0v-7zm3 0v7a.5.5 0 0 0 1 0v-7z"/>
+                                <path d="M14.5 3H11V1H5v2H1.5v1H2v10a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4h.5z"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                `;
+			}
+		}
+	};
+
+	xhr.send(jsonPayload);
 }
