@@ -1,13 +1,11 @@
 <?php
 	$inData = getRequestInfo();
 
-	// Open up env file
+	// open up env file
 	$env = parse_ini_file('.env');
-	$first_name = $inData["firstName"];
-	$last_name = $inData["lastName"];
-	$phone = $inData["phone"];
-	$email = $inData["email"];
+	$contactId = $inData["contactId"];
 	$userId = $inData["userId"];
+
 
 	// Database settings
 	$db_host = $env['DB_SERVER'];
@@ -22,12 +20,23 @@
 	} 
 	else
 	{
-		$stmt = $conn->prepare("INSERT into Contacts (FirstName , LastName , Phone , Email, UserID) VALUES (?, ?, ?, ?, ?);");
-		$stmt->bind_param("sssss", $first_name, $last_name, $phone, $email, $userId);
+		// delete contact only if it belongs to the user
+		$stmt = $conn->prepare("DELETE FROM Contacts WHERE ID = ? AND UserID = ?");
+		$stmt->bind_param("ii", $contactId, $userId);
 		$stmt->execute();
+		
+		// confirm if the row was actually deleted
+		if ($stmt->affected_rows > 0)
+		{
+			returnWithError("");
+		}
+		else
+		{
+			returnWithError("Contact not found or unauthorized");
+		}
+		
 		$stmt->close();
 		$conn->close();
-		returnWithError("");
 	}
 
 	function getRequestInfo()

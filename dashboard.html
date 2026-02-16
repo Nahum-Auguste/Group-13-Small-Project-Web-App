@@ -1,49 +1,95 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>COP 4331 LAMP Stack Demo</title>
+	<meta charset="UTF-8">
+	<title>Contacts Dashboard</title>
 	<script type="text/javascript" src="js/code.js"></script>
-    <link href="css/styles.css" rel="stylesheet">	
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;700&display=swap" rel="stylesheet">
-	
+	<link href="css/dashboard.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;700&display=swap" rel="stylesheet">
 	<script type="text/javascript">
-	document.addEventListener('DOMContentLoaded', function() 
-	{
-		readCookie();
-	}, false);
+		document.addEventListener('DOMContentLoaded', function () {
+			readCookie();
+			displayContacts();
+		}, false);
 	</script>
-	
 </head>
+
 <body>
 
-	<div class="container">
+	<div class="dashboard-container">
 
-		<div class="header">
-			<h1 id="title">Contacts Manager</h1>
-
-			<div id="loggedInDiv">
-				<h1>Welcome, <span id="first-name"></span></h1>
-				<button type="button" id="logoutButton" class="buttons" onclick="doLogout();"> Log Out </button>
+		<!-- Header -->
+		<header class="dashboard-header">
+			<div class="welcome-block">
+				<h1 class="welcome-text">
+					Welcome, <span id="first-name"></span>
+				</h1>
 			</div>
-		</div>
 
-		<div id="accessUIDiv">
-			<br />
+			<button
+				type="button"
+				id="logoutButton"
+				class="buttons logout-button"
+				onclick="doLogout();">
+				Log Out
+			</button>
+		</header>
 
-			<input type="text" id="searchText" placeholder="Contact To Search For"/>
-			<button type="button" id="searchContactsButton" class="buttons" onclick="searchContacts();"> Search Contacts </button><br />
-			<span id="contactsSearchResult"></span>
-			<p id="contactsList">
-			</p><br /><br />
+		<main id="accessUIDiv" class="dashboard-main">
 
-			<h3>Add a New Contact</h3>
-			<input type="text" id="contactFirstName" placeholder="First Name" />
-			<input type="text" id="contactLastName" placeholder="Last Name" />
-			<input type="text" id="contactPhone" placeholder="Phone Number" />
-			<input type="text" id="contactEmail" placeholder="Email Address" />
-			<button type="button" id="addContactButton" class="buttons" onclick="addContact();"> Add Contact </button><br />
-			<span id="addContactResult"></span>
-		</div>
+			<!-- Top Cards -->
+			<section class="dashboard-cards">
+
+				<!-- Add Contact -->
+				<div class="dashboard-card">
+					<h2 class="card-title">Add Contact</h2>
+
+					<input type="text" id="contactFirstName" placeholder="First Name" />
+					<input type="text" id="contactLastName" placeholder="Last Name" />
+					<input type="text" id="contactPhone" placeholder="Phone Number" />
+					<input type="text" id="contactEmail" placeholder="Email Address" />
+
+					<button
+						type="button"
+						id="addContactButton"
+						class="buttons"
+						onclick="addContact();">
+						Add Contact
+					</button>
+
+					<span id="addContactResult"></span>
+				</div>
+
+				<!-- Search Contacts -->
+				<div class="dashboard-card">
+					<h2 class="card-title">Search Contacts</h2>
+
+					<input
+						type="text"
+						id="searchText"
+						placeholder="Search by name" />
+
+					<button
+						type="button"
+						id="searchContactsButton"
+						class="buttons"
+						onclick="searchContacts();">
+						Search
+					</button>
+
+					<span id="contactsSearchResult"></span>
+				</div>
+
+			</section>
+
+			<!-- Display Contacts -->
+			<section class="dashboard-card dashboard-card--full">
+    			<h2 class="card-title">All Contacts</h2>
+
+    			<div id="contactsList" class="contacts-list">
+    			</div>
+			</section>
+		</main>
 	</div>
 </body>
 </html>
