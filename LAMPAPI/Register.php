@@ -54,27 +54,44 @@
         }
 
         else {
-            // Database doesn't allow duplicate logins; be sure to check for
-            // that somewhere here - mehreen
+            // Check if login already exists
+            $isDuplicate= $conn->prepare(
+                "SELECT * FROM Users WHERE LOGIN = ?"
+            );
 
-            $stmt = $conn->prepare(
+            $isDuplicate->bind_param("s", $login);
+            $isDuplicate->execute();
+            $checkDup = $isDuplicate->get_result();
 
-            "INSERT INTO Users (firstName, lastName, login, password)
+            // If login exists in table, return error
+            if ($checkDup->num_rows > 0) {
+                returnWithError("Username already exists; please choose another one.");
+                $isDuplicate->close();
+                
+            }
+            
+            // Login unique; insert into table
+            else {
 
-             VALUES (?,?,?,?)");
+                $stmt = $conn->prepare(
+
+                "INSERT INTO Users (firstName, lastName, login, password)
+
+                VALUES (?,?,?,?)");
 
 
 
-            $stmt->bind_param("ssss",$firstName,$lastName,$login,$password);
+                $stmt->bind_param("ssss",$firstName,$lastName,$login,$password);
 
-            $stmt->execute();
+                $stmt->execute();
 
-            $stmt->close();
+                $stmt->close();
 
 
 
-            returnWithInfo( $firstName, $lastName, $login);
+                returnWithInfo( $firstName, $lastName, $login);
 
+            }
         }
 
         $conn->close();
