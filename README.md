@@ -1,10 +1,15 @@
-"# Group-13-Small-Project-Web-App" 
-- SQL connection stuff is in a separate .env file (in LAMPAPI); its the exact same stuff from the 
-colors lab. be sure to make ur own
-- In Users table, duplicate Logins are not allowed; this is the only field that's unique
-- In Contacts table, "UserID" is a foreign key; it's connected to the Users table's primary
-key (ID). Meaning, if you delete a User, all the Contacts associated with the deleted User
-will be deleted as well. 
+# Contact Manager Website - Group 13
+
+Built using the LAMP---Linux, Apache, MySQL, PHP--stack and hosted on Digital Ocean. <br>
+URL: lampmekha.xyz
+
+Contributers: Nahum Auguste, Haley Bae, Noam Chemla, Carson Davie, Mehreen Khan, & Nickie Sethi
+
+## Roles
+Project Manager: Haley Bae <br>
+Frontend : Noam Chemla, Carson Davie <br>
+API: Nahum Auguste, Haley Bae, Nickie Sethi <br>
+Database: Mehreen Khan <br>
 
 ## AI Assistance Disclosure
 
@@ -17,5 +22,5 @@ This project was developed with assistance from generative AI tools:
 developed silent login functionality to synchronize User IDs after registration
 
 All AI-generated code was reviewed, tested, and modified to meet 
-assignment requirements. Final implementation reflects my understanding 
+assignment requirements. Final implementation reflects our understanding 
 of the concepts.
