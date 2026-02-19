@@ -1,5 +1,4 @@
-// const urlBase = 'http://lampmekha.xyz/LAMPAPI’';
-const urlBase = 'http://localhost/Group-13-Small-Project-Web-App/LAMPAPI'
+const urlBase = 'http://lampmekha.xyz/LAMPAPI’';
 const extension = 'php';
 
 let userId = 0;
