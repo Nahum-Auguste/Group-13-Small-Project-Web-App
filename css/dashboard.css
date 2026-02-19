@@ -1,6 +1,6 @@
 body {
     font-family: "Quicksand", sans-serif;
-    background-color: #c7885e;
+    background-color: #d48362;
     margin: 0;
 }
 
@@ -15,12 +15,11 @@ body {
     border-radius: 20px;
     padding: 1.5rem 2rem;
     margin-bottom: 2rem;
-
     display: flex;
     justify-content: space-between;
     align-items: center;
 
-    border: 1px solid #ead8c8;
+    border: 3px solid #95b247;
 }
 
 
@@ -33,7 +32,7 @@ body {
 }
 
 .buttons {
-    background-color: #d9a17c;
+    background-color: #505E26;
     color: white;
     border: none;
     padding: 0.85rem 1.6rem;
@@ -44,7 +43,7 @@ body {
 }
 
 .buttons:hover {
-    background-color: #c7885e;
+    background-color: #60712D;
     transform: translateY(-2px);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.12);
 }
@@ -75,9 +74,10 @@ body {
     border-radius: 18px;
     padding: 1.8rem;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-
+    border: 3px solid #95b247;
     display: flex;
     flex-direction: column;
+    justify-items: center;
 }
 
 .card-title {
@@ -93,7 +93,7 @@ body {
     padding: 0.8rem 1rem;
     margin-bottom: 0.6rem;
 
-    border: 1px solid #e6d4c3;
+    border: 1px solid #95b247;
     border-radius: 10px;
 
     background-color: #fffdfb;
@@ -144,13 +144,12 @@ body {
 
 .contact-row {
     background-color: #fffdfb;
-    border: 1px solid #ead8c8;
+    border: 1px solid #95b247;
     border-radius: 14px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.8rem;
-    border-bottom: 1px solid #f0e2d7;
+    padding: 1rem;
 }
 
 .contact-row:hover {
